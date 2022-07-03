@@ -24,8 +24,8 @@ $json          = array();
 $cat_points    = array();
 ?>
 <div style="display: none;" class="wpProQuiz_quiz">
-    <ol class="wpProQuiz_list">
-        <?php
+	<ol class="wpProQuiz_list">
+		<?php
 		$index = 0;
 		foreach ( $quiz_view->question as $question ) {
 			$index ++;
@@ -64,12 +64,9 @@ $cat_points    = array();
 			);
 
 			?>
-        <li class="wpProQuiz_listItem" style="display: none;"
-            data-type="<?php echo esc_attr( $question->getAnswerType() ); ?>"
-            data-question-meta="<?php echo htmlspecialchars( wp_json_encode( $question_meta ) ); ?>">
-            <div class="wpProQuiz_question_page"
-                <?php $quiz_view->isDisplayNone( $quiz->getQuizModus() != WpProQuiz_Model_Quiz::QUIZ_MODUS_SINGLE && ! $quiz->isHideQuestionPositionOverview() ); ?>>
-                <?php
+			<li class="wpProQuiz_listItem" style="display: none;" data-type="<?php echo esc_attr( $question->getAnswerType() ); ?>" data-question-meta="<?php echo htmlspecialchars( wp_json_encode( $question_meta ) ); ?>">
+				<div class="wpProQuiz_question_page" <?php $quiz_view->isDisplayNone( $quiz->getQuizModus() != WpProQuiz_Model_Quiz::QUIZ_MODUS_SINGLE && ! $quiz->isHideQuestionPositionOverview() ); ?> >
+				<?php
 					echo wp_kses_post(
 						SFWD_LMS::get_template(
 							'learndash_quiz_messages',
@@ -88,10 +85,9 @@ $cat_points    = array();
 						)
 					);
 				?>
-            </div>
-            <h5 style="<?php echo $quiz->isHideQuestionNumbering() ? 'display: none;' : 'display: inline-block;'; ?>"
-                class="wpProQuiz_header">
-                <?php
+				</div>
+				<h5 style="<?php echo $quiz->isHideQuestionNumbering() ? 'display: none;' : 'display: inline-block;'; ?>" class="wpProQuiz_header">
+					<?php
 						echo wp_kses_post(
 							SFWD_LMS::get_template(
 								'learndash_quiz_messages',
@@ -105,11 +101,12 @@ $cat_points    = array();
 						);
 					?>
 
-            </h5>
+				</h5>
 
-            <?php if ( $quiz->isShowPoints() ) { ?>
-            <span style="font-weight: bold; float: right;">
-                <?php
+				<?php if ( $quiz->isShowPoints() ) { ?>
+					<span
+						style="font-weight: bold; float: right;">
+						<?php
 						echo wp_kses_post(
 							SFWD_LMS::get_template(
 								'learndash_quiz_messages',
@@ -124,13 +121,13 @@ $cat_points    = array();
 						);
 
 						?>
-            </span>
-            <div style="clear: both;"></div>
-            <?php } ?>
+						</span>
+					<div style="clear: both;"></div>
+				<?php } ?>
 
-            <?php if ( $question->getCategoryId() && $quiz->isShowCategory() ) { ?>
-            <div style="font-weight: bold; padding-top: 5px;">
-                <?php
+				<?php if ( $question->getCategoryId() && $quiz->isShowCategory() ) { ?>
+					<div style="font-weight: bold; padding-top: 5px;">
+						<?php
 							echo wp_kses_post(
 								SFWD_LMS::get_template(
 									'learndash_quiz_messages',
@@ -144,13 +141,12 @@ $cat_points    = array();
 								)
 							);
 						?>
-            </div>
-            <?php } ?>
-            <div class="wpProQuiz_question" style="margin: 10px 0px 0px 0px;">
-                <div class="wpProQuiz_question_text d-flex justify-content-center"
-                    style="color:#373949; font-size:20px;">
-
-                    <?php
+					</div>
+				<?php } ?>
+				<div class="wpProQuiz_question" style="margin: 10px 0px 0px 0px;">
+					<div class="wpProQuiz_question_text d-flex justify-content-center" style="color:#373949; font-size:20px;">
+					
+						<?php
 							$wpproquiz_question_text = $question->getQuestion();
 							$wpproquiz_question_text = sanitize_post_field( 'post_content', $wpproquiz_question_text, 0, 'display' );
 							$wpproquiz_question_text = wpautop( $wpproquiz_question_text );
@@ -159,18 +155,18 @@ $cat_points    = array();
 							$wpproquiz_question_text = do_shortcode( $wpproquiz_question_text );
 							echo $wpproquiz_question_text; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Need to allow HTML / shortcode output
 						?>
-                </div>
-                <p class="wpProQuiz_clear" style="clear:both;"></p>
+					</div>
+					<p class="wpProQuiz_clear" style="clear:both;"></p>
 
-                <?php
+					<?php
 					/**
 					 * Matrix Sort Answer
 					 */
 					?>
-                <?php if ( $question->getAnswerType() === 'matrix_sort_answer' ) { ?>
-                <div class="wpProQuiz_matrixSortString">
-                    <h5 class="wpProQuiz_header">
-                        <?php
+					<?php if ( $question->getAnswerType() === 'matrix_sort_answer' ) { ?>
+						<div class="wpProQuiz_matrixSortString">
+							<h5 class="wpProQuiz_header">
+							<?php
 							echo wp_kses_post(
 								SFWD_LMS::get_template(
 									'learndash_quiz_messages',
@@ -182,9 +178,9 @@ $cat_points    = array();
 								)
 							);
 							?>
-                    </h5>
-                    <ul class="wpProQuiz_sortStringList">
-                        <?php
+							</h5>
+							<ul class="wpProQuiz_sortStringList">
+							<?php
 							$answer_array_new_matrix = array();
 							foreach ( $answer_array as $q_idx => $q ) {
 								$datapos                             = LD_QuizPro::datapos( $question->getId(), $q_idx );
@@ -208,44 +204,37 @@ $cat_points    = array();
 
 							foreach ( $answer_array as $k => $v ) {
 								?>
-                        <li class="wpProQuiz_sortStringItem" data-pos="<?php echo esc_attr( $k ); ?>">
-                            <?php echo $v->isSortStringHtml() ? do_shortcode( nl2br( $v->getSortString() ) ) : esc_html( $v->getSortString() ); ?>
-                        </li>
-                        <?php
+								<li class="wpProQuiz_sortStringItem" data-pos="<?php echo esc_attr( $k ); ?>">
+								<?php echo $v->isSortStringHtml() ? do_shortcode( nl2br( $v->getSortString() ) ) : esc_html( $v->getSortString() ); ?>
+								</li>
+								<?php
 							}
 
 								$answer_array = $answer_array_new_matrix;
 							?>
-                    </ul>
-                    <div style="clear: both;"></div>
-                </div>
-                <?php } ?>
+							</ul>
+							<div style="clear: both;"></div>
+						</div>
+					<?php } ?>
 
-                <?php
+					<?php
 					/**
 					 * Print questions in a list for all other answer types
 					 */
 					?>
-                <div class="d-flex flex flex-row flex-wrap justify-content-between">
-                    <?php
-						//$relatedParagraph = get_field('paragraph', $question->getQuestionPostId());
-						// test purpose only
-						$relatedParagraph = (object)[
-							post_title => 'title',
-							post_content => 'content',
-						];
-						if ($relatedParagraph) :
-					?>
-                    <div class="col-11 mx-auto col-md-5 borde my-2 px-2 "
-                        style="background-color:#F3F3F3;border-radius:9px;">
-                        <h6 class="text-center mt-2" style="color:#707070;"><?= $relatedParagraph->post_title; ?></h6>
-                        <p class="text-center mt-2" style="color:#707070;"><?= $relatedParagraph->post_content; ?></p>
-                    </div>
-                    <?php endif; ?>
-                    <ul class="wpProQuiz_questionList col-11 col-md-5  mx-auto my-2 px-2"
-                        data-question_id="<?php echo esc_attr( $question->getId() ); ?>"
-                        data-type="<?php echo esc_attr( $question->getAnswerType() ); ?>">
-                        <?php
+					<div class="d-flex flex flex-row flex-wrap justify-content-between">
+					    <div class="col-11 mx-auto col-md-5 borde my-2 px-2 "style="background-color:#F3F3F3;border-radius:9px;">
+						 <h6 class="text-center mt-2" style="color:#707070;">سؤال بنص موجود</h6>
+						 <p class="text-center mt-2" style="color:#707070;">
+						 هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.
+إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد، النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه الخصوص، حيث يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع                          .
+ومن هنا وجب على المصمم أن يضع نصوصا مؤقتة على التصميم ليظهر للعميل الشكل كاملاً،دور مولد النص العربى أن يوفر على المصمم عناء البحث عن نص بديل لا علاقة له بالموضوع الذى يتحدث عنه التصميم فيظهر بشكل لا يليق.
+
+						 </p>
+					    </div>
+						<ul class="wpProQuiz_questionList col-11 col-md-5  mx-auto my-2 px-2" data-question_id="<?php echo esc_attr( $question->getId() ); ?>"
+							data-type="<?php echo esc_attr( $question->getAnswerType() ); ?>">
+							<?php
 							if ( $question->getAnswerType() === 'sort_answer' ) {
 								$answer_array_new = array();
 								foreach ( $answer_array as $q_idx => $q ) {
@@ -305,35 +294,34 @@ $cat_points    = array();
 									}
 									?>
 
-                        <li class="wpProQuiz_questionListItem" data-pos="<?php echo esc_attr( $datapos ); ?>">
-                            <?php
+									<li class="wpProQuiz_questionListItem" data-pos="<?php echo esc_attr( $datapos ); ?>">
+										<?php
 										/**
 										 *  Single/Multiple
 										 */
 										if ( $question->getAnswerType() === 'single' || $question->getAnswerType() === 'multiple' ) {
 											$json[ $question->getId() ]['correct'][] = (int) $v->isCorrect();
 											?>
-                            <span <?php echo $quiz->isNumberedAnswer() ? '' : 'style="display:none;"'; ?>></span>
-                            <label style="background-color:#F3F3F3;color:#363848;text-align: right;">
-                                <input class="wpProQuiz_questionInput d-none" autocomplete="off"
-                                    type="<?php echo $question->getAnswerType() === 'single' ? 'radio' : 'checkbox'; ?>"
-                                    name="question_<?php echo esc_attr( $quiz->getId() ); ?>_<?php echo esc_attr( $question->getId() ); ?>"
-                                    value="<?php echo esc_attr( ( $answer_index + 1 ) ); ?>">
-                                <?php echo $answer_text; ?>
-                            </label>
+											<span <?php echo $quiz->isNumberedAnswer() ? '' : 'style="display:none;"'; ?>></span>
+											<label style="background-color:#F3F3F3;color:#363848;text-align: right;">
+												<input class="wpProQuiz_questionInput d-none" autocomplete="off"
+														type="<?php echo $question->getAnswerType() === 'single' ? 'radio' : 'checkbox'; ?>"
+														name="question_<?php echo esc_attr( $quiz->getId() ); ?>_<?php echo esc_attr( $question->getId() ); ?>"
+														value="<?php echo esc_attr( ( $answer_index + 1 ) ); ?>"> <?php echo $answer_text; ?>
+											</label>
 
-                            <?php
+											<?php
 											/**
 											 *  Sort Answer
 											 */
 										} elseif ( $question->getAnswerType() === 'sort_answer' ) {
 											$json[ $question->getId() ]['correct'][] = (int) $answer_index;
 											?>
-                            <div class="wpProQuiz_sortable">
-                                <?php echo $answer_text; ?>
-                            </div>
+											<div class="wpProQuiz_sortable">
+												<?php echo $answer_text; ?>
+											</div>
 
-                            <?php
+											<?php
 											/**
 											 *  Free Answer
 											 */
@@ -343,14 +331,14 @@ $cat_points    = array();
 												$json[ $question->getId() ] = array_merge( $json[ $question->getId() ], $question_answer_data );
 											}
 											?>
-                            <label>
-                                <input class="wpProQuiz_questionInput" type="text" autocomplete="off"
-                                    name="question_<?php echo esc_attr( $quiz->getId() ); ?>_<?php echo esc_attr( $question->getId() ); ?>"
-                                    style="width: 300px;">
-                                <span class="wpProQuiz_freeCorrect" style="display:none"></span>
-                            </label>
+											<label>
+												<input class="wpProQuiz_questionInput" type="text" autocomplete="off"
+														name="question_<?php echo esc_attr( $quiz->getId() ); ?>_<?php echo esc_attr( $question->getId() ); ?>"
+														style="width: 300px;">
+												<span class="wpProQuiz_freeCorrect" style="display:none"></span>
+											</label>
 
-                            <?php
+											<?php
 											/**
 											 *  Matrix Sort Answer
 											 */
@@ -358,20 +346,21 @@ $cat_points    = array();
 											$json[ $question->getId() ]['correct'][] = (int) $answer_index;
 											$msacw_value                             = $question->getMatrixSortAnswerCriteriaWidth() > 0 ? $question->getMatrixSortAnswerCriteriaWidth() : 20;
 											?>
-                            <table>
-                                <tbody>
-                                    <tr class="wpProQuiz_mextrixTr">
-                                        <td width="<?php echo esc_attr( $msacw_value ); ?>%">
-                                            <div class="wpProQuiz_maxtrixSortText"><?php echo $answer_text; ?></div>
-                                        </td>
-                                        <td width="<?php echo esc_attr( 100 - $msacw_value ); ?>%">
-                                            <ul class="wpProQuiz_maxtrixSortCriterion"></ul>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+											<table>
+												<tbody>
+												<tr class="wpProQuiz_mextrixTr">
+													<td width="<?php echo esc_attr( $msacw_value ); ?>%">
+														<div
+															class="wpProQuiz_maxtrixSortText"><?php echo $answer_text; ?></div>
+													</td>
+													<td width="<?php echo esc_attr( 100 - $msacw_value ); ?>%">
+														<ul class="wpProQuiz_maxtrixSortCriterion"></ul>
+													</td>
+												</tr>
+												</tbody>
+											</table>
 
-                            <?php
+											<?php
 											/**
 											 *  Cloze Answer
 											 */
@@ -408,10 +397,12 @@ $cat_points    = array();
 										} elseif ( $question->getAnswerType() === 'essay' ) {
 											if ( $v->getGradedType() === 'text' ) :
 												?>
-                            <textarea class="wpProQuiz_questionEssay" rows="10" cols="40"
-                                name="question_<?php echo esc_attr( $quiz->getId() ); ?>_<?php echo esc_attr( $question->getId() ); ?>"
-                                id="wpProQuiz_questionEssay_question_<?php echo esc_attr( $quiz->getId() ); ?>_<?php echo esc_attr( $question->getId() ); ?>"
-                                cols="30" autocomplete="off" rows="10" placeholder="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+												<textarea class="wpProQuiz_questionEssay" rows="10" cols="40"
+													name="question_<?php echo esc_attr( $quiz->getId() ); ?>_<?php echo esc_attr( $question->getId() ); ?>"
+													id="wpProQuiz_questionEssay_question_<?php echo esc_attr( $quiz->getId() ); ?>_<?php echo esc_attr( $question->getId() ); ?>"
+													cols="30" autocomplete="off"
+													rows="10"
+													placeholder="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 														SFWD_LMS::get_template(
 															'learndash_quiz_messages',
 															array(
@@ -420,10 +411,9 @@ $cat_points    = array();
 																'message'      => esc_html__( 'Type your response here', 'learndash' ),
 															)
 														)
-													); ?>"></textarea>
-                            <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,Squiz.PHP.EmbeddedPhp.ContentAfterEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
-                            <?php elseif ( $v->getGradedType() === 'upload' ) : ?>
-                            <?php
+													); ?>"></textarea> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,Squiz.PHP.EmbeddedPhp.ContentAfterEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+												<?php elseif ( $v->getGradedType() === 'upload' ) : ?>
+													<?php
 														echo wp_kses_post(
 															SFWD_LMS::get_template(
 																'learndash_quiz_messages',
@@ -435,29 +425,20 @@ $cat_points    = array();
 															)
 														);
 													?>
-                            <form enctype="multipart/form-data" method="post" name="uploadEssay">
-                                <input type='file' name='uploadEssay[]'
-                                    id='uploadEssay_<?php echo esc_attr( $question->getId() ); ?>' size='35'
-                                    class='wpProQuiz_upload_essay' />
-                                <input type="submit"
-                                    id='uploadEssaySubmit_<?php echo esc_attr( $question->getId() ); ?>'
-                                    value="<?php esc_html_e( 'Upload', 'learndash' ); ?>" />
-                                <input type="hidden"
-                                    id="_uploadEssay_nonce_<?php echo esc_attr( $question->getId() ); ?>"
-                                    name="_uploadEssay_nonce"
-                                    value="<?php echo esc_attr( wp_create_nonce( 'learndash-upload-essay-' . $question->getId() ) ); ?>" />
-                                <input type="hidden" class="uploadEssayFile"
-                                    id='uploadEssayFile_<?php echo esc_attr( $question->getId() ); ?>' value="" />
-                            </form>
-                            <div id="uploadEssayMessage_<?php echo esc_attr( $question->getId() ); ?>"
-                                class="uploadEssayMessage"></div>
-                            <?php else : ?>
-                            <?php esc_html_e( 'Essay type not found', 'learndash' ); ?>
-                            <?php endif; ?>
+													<form enctype="multipart/form-data" method="post" name="uploadEssay">
+														<input type='file' name='uploadEssay[]' id='uploadEssay_<?php echo esc_attr( $question->getId() ); ?>' size='35' class='wpProQuiz_upload_essay' />
+														<input type="submit" id='uploadEssaySubmit_<?php echo esc_attr( $question->getId() ); ?>' value="<?php esc_html_e( 'Upload', 'learndash' ); ?>" />
+														<input type="hidden" id="_uploadEssay_nonce_<?php echo esc_attr( $question->getId() ); ?>" name="_uploadEssay_nonce" value="<?php echo esc_attr( wp_create_nonce( 'learndash-upload-essay-' . $question->getId() ) ); ?>" />
+														<input type="hidden" class="uploadEssayFile" id='uploadEssayFile_<?php echo esc_attr( $question->getId() ); ?>' value="" />
+													</form>
+													<div id="uploadEssayMessage_<?php echo esc_attr( $question->getId() ); ?>" class="uploadEssayMessage"></div>
+												<?php else : ?>
+													<?php esc_html_e( 'Essay type not found', 'learndash' ); ?>
+												<?php endif; ?>
 
-                            <p class="graded-disclaimer">
-                                <?php if ( 'graded-full' == $v->getGradingProgression() ) : ?>
-                                <?php
+												<p class="graded-disclaimer">
+													<?php if ( 'graded-full' == $v->getGradingProgression() ) : ?>
+														<?php
 														echo wp_kses_post(
 															SFWD_LMS::get_template(
 																'learndash_quiz_messages',
@@ -469,8 +450,8 @@ $cat_points    = array();
 															)
 														);
 														?>
-                                <?php elseif ( 'not-graded-full' == $v->getGradingProgression() ) : ?>
-                                <?php
+													<?php elseif ( 'not-graded-full' == $v->getGradingProgression() ) : ?>
+														<?php
 															echo wp_kses_post(
 																SFWD_LMS::get_template(
 																	'learndash_quiz_messages',
@@ -482,8 +463,8 @@ $cat_points    = array();
 																)
 															);
 														?>
-                                <?php elseif ( 'not-graded-none' == $v->getGradingProgression() ) : ?>
-                                <?php
+													<?php elseif ( 'not-graded-none' == $v->getGradingProgression() ) : ?>
+														<?php
 															echo wp_kses_post(
 																SFWD_LMS::get_template(
 																	'learndash_quiz_messages',
@@ -495,40 +476,36 @@ $cat_points    = array();
 																)
 															);
 														?>
-                                <?php endif; ?>
-                            </p>
-                            <?php
+													<?php endif; ?>
+												</p>
+											<?php
 										}
 
 										?>
-                        </li>
-                        <?php
+									</li>
+									<?php
 									$answer_index ++;
 								}
 							}
 							?>
-                    </ul>
-                </div>
-
-                <?php if ( $question->getAnswerType() === 'sort_answer' ) { ?>
-                <div class="wpProQuiz_questionList_containers">
-                    <p><?php esc_html_e( 'View Answers', 'learndash' ); ?>: <input type="button"
-                            class="wpProQuiz_questionList_containers_view_student wpProQuiz_questionList_containers_view_active wpProQuiz_button2"
-                            value="<?php esc_html_e( 'Student', 'learndash' ); ?>"> <input type="button"
-                            class="wpProQuiz_questionList_containers_view_correct wpProQuiz_button2"
-                            value="<?php esc_html_e( 'Correct', 'learndash' ); ?>" /></p>
-                    <div class="wpProQuiz_questionList_container_student"></div>
-                    <div class="wpProQuiz_questionList_container_correct"></div>
-                </div>
-                <?php } ?>
-            </div>
-            <?php if ( ! $quiz->isHideAnswerMessageBox() ) { ?>
-            <div class="wpProQuiz_response" style="display: none;">
-                <div style="display: none;" class="wpProQuiz_correct">
-                    <?php if ( $question->isShowPointsInBox() && $question->isAnswerPointsActivated() ) { ?>
-                    <div>
-                        <span class="wpProQuiz_response_correct_label" style="float: left;">
-                            <?php
+						</ul>
+					</div>
+					
+					<?php if ( $question->getAnswerType() === 'sort_answer' ) { ?>
+						<div class="wpProQuiz_questionList_containers">
+							<p><?php esc_html_e( 'View Answers', 'learndash' ); ?>: <input type="button" class="wpProQuiz_questionList_containers_view_student wpProQuiz_questionList_containers_view_active wpProQuiz_button2" value="<?php esc_html_e( 'Student', 'learndash' ); ?>"> <input type="button" class="wpProQuiz_questionList_containers_view_correct wpProQuiz_button2" value="<?php esc_html_e( 'Correct', 'learndash' ); ?>" /></p>
+							<div class="wpProQuiz_questionList_container_student"></div>
+							<div class="wpProQuiz_questionList_container_correct"></div>
+						</div>
+					<?php } ?>
+				</div>
+				<?php if ( ! $quiz->isHideAnswerMessageBox() ) { ?>
+					<div class="wpProQuiz_response" style="display: none;">
+						<div style="display: none;" class="wpProQuiz_correct">
+							<?php if ( $question->isShowPointsInBox() && $question->isAnswerPointsActivated() ) { ?>
+								<div>
+									<span class="wpProQuiz_response_correct_label" style="float: left;">
+									<?php
 										echo wp_kses_post(
 											SFWD_LMS::get_template(
 												'learndash_quiz_messages',
@@ -540,10 +517,10 @@ $cat_points    = array();
 											)
 										);
 									?>
-                        </span>
-                        <span class="wpProQuiz_response_correct_points_label" style="float: right;">
-                            <?php echo esc_html( $question->getPoints() ) . ' / ' . esc_html( $question->getPoints() ); ?>
-                            <?php
+									</span>
+									<span class="wpProQuiz_response_correct_points_label" style="float: right;">
+										<?php echo esc_html( $question->getPoints() ) . ' / ' . esc_html( $question->getPoints() ); ?>
+										<?php
 										echo wp_kses_post(
 											SFWD_LMS::get_template(
 												'learndash_quiz_messages',
@@ -555,11 +532,11 @@ $cat_points    = array();
 											)
 										);
 										?>
-                        </span>
-                        <div style="clear: both;"></div>
-                    </div>
-                    <?php } elseif ( 'essay' == $question->getAnswerType() ) { ?>
-                    <?php
+									</span>
+									<div style="clear: both;"></div>
+								</div>
+							<?php } elseif ( 'essay' == $question->getAnswerType() ) { ?>
+								<?php
 								echo wp_kses_post(
 									SFWD_LMS::get_template(
 										'learndash_quiz_messages',
@@ -571,9 +548,9 @@ $cat_points    = array();
 									)
 								);
 								?>
-                    <?php } else { ?>
-                    <span>
-                        <?php
+							<?php } else { ?>
+								<span>
+								<?php
 								echo wp_kses_post(
 									SFWD_LMS::get_template(
 										'learndash_quiz_messages',
@@ -585,16 +562,15 @@ $cat_points    = array();
 									)
 								);
 								?>
-                    </span>
-                    <?php } ?>
-                    <<?php echo esc_attr( LEARNDASH_QUIZ_ANSWER_MESSAGE_HTML_TYPE ); ?> class="wpProQuiz_AnswerMessage">
-                    </<?php echo esc_attr( LEARNDASH_QUIZ_ANSWER_MESSAGE_HTML_TYPE ); ?>>
-                </div>
-                <div style="display: none;" class="wpProQuiz_incorrect">
-                    <?php if ( $question->isShowPointsInBox() && $question->isAnswerPointsActivated() ) { ?>
-                    <div>
-                        <span style="float: left;">
-                            <?php
+								</span>
+							<?php } ?>
+							<<?php echo esc_attr( LEARNDASH_QUIZ_ANSWER_MESSAGE_HTML_TYPE ); ?> class="wpProQuiz_AnswerMessage"></<?php echo esc_attr( LEARNDASH_QUIZ_ANSWER_MESSAGE_HTML_TYPE ); ?>>
+						</div>
+						<div style="display: none;" class="wpProQuiz_incorrect">
+							<?php if ( $question->isShowPointsInBox() && $question->isAnswerPointsActivated() ) { ?>
+								<div>
+									<span style="float: left;">
+										<?php
 											echo wp_kses_post(
 												SFWD_LMS::get_template(
 													'learndash_quiz_messages',
@@ -606,10 +582,9 @@ $cat_points    = array();
 												)
 											);
 										?>
-                        </span>
-                        <span style="float: right;"><span class="wpProQuiz_responsePoints"></span> /
-                            <?php echo esc_html( $question->getPoints() ); ?>
-                            <?php
+									</span>
+									<span style="float: right;"><span class="wpProQuiz_responsePoints"></span> / <?php echo esc_html( $question->getPoints() ); ?>
+									<?php
 										echo wp_kses_post(
 											SFWD_LMS::get_template(
 												'learndash_quiz_messages',
@@ -621,12 +596,12 @@ $cat_points    = array();
 											)
 										);
 									?>
-                        </span>
+									</span>
 
-                        <div style="clear: both;"></div>
-                    </div>
-                    <?php } elseif ( 'essay' == $question->getAnswerType() ) { ?>
-                    <?php
+									<div style="clear: both;"></div>
+								</div>
+							<?php } elseif ( 'essay' == $question->getAnswerType() ) { ?>
+								<?php
 								echo wp_kses_post(
 									SFWD_LMS::get_template(
 										'learndash_quiz_messages',
@@ -638,9 +613,9 @@ $cat_points    = array();
 									)
 								);
 								?>
-                    <?php } else { ?>
-                    <span>
-                        <?php
+							<?php } else { ?>
+								<span>
+								<?php
 								echo wp_kses_post(
 									SFWD_LMS::get_template(
 										'learndash_quiz_messages',
@@ -652,19 +627,18 @@ $cat_points    = array();
 									)
 								);
 								?>
-                    </span>
-                    <?php } ?>
-                    <<?php echo esc_attr( LEARNDASH_QUIZ_ANSWER_MESSAGE_HTML_TYPE ); ?> class="wpProQuiz_AnswerMessage">
-                    </<?php echo esc_attr( LEARNDASH_QUIZ_ANSWER_MESSAGE_HTML_TYPE ); ?>>
-                </div>
-            </div>
-            <?php } ?>
+							</span>
+							<?php } ?>
+							<<?php echo esc_attr( LEARNDASH_QUIZ_ANSWER_MESSAGE_HTML_TYPE ); ?> class="wpProQuiz_AnswerMessage"></<?php echo esc_attr( LEARNDASH_QUIZ_ANSWER_MESSAGE_HTML_TYPE ); ?>>
+						</div>
+					</div>
+				<?php } ?>
 
-            <?php if ( $question->isTipEnabled() ) { ?>
-            <div class="wpProQuiz_tipp" style="display: none; position: relative;">
-                <div>
-                    <h5 style="margin: 0px 0px 10px;" class="wpProQuiz_header">
-                        <?php
+				<?php if ( $question->isTipEnabled() ) { ?>
+					<div class="wpProQuiz_tipp" style="display: none; position: relative;">
+						<div>
+							<h5 style="margin: 0px 0px 10px;" class="wpProQuiz_header">
+							<?php
 								echo wp_kses_post(
 									SFWD_LMS::get_template(
 										'learndash_quiz_messages',
@@ -676,19 +650,19 @@ $cat_points    = array();
 									)
 								);
 							?>
-                    </h5>
-                    <?php
+							</h5>
+							<?php
 							$tip_message = apply_filters( 'comment_text', $question->getTipMsg(), null, null );
 							global $wp_embed;
 							$tip_message = $wp_embed->run_shortcode( $tip_message );
 							echo do_shortcode( $tip_message );
 							?>
-                </div>
-            </div>
-            <?php } ?>
+						</div>
+					</div>
+				<?php } ?>
 
-            <?php if ( $quiz->getQuizModus() == WpProQuiz_Model_Quiz::QUIZ_MODUS_CHECK && ! $quiz->isSkipQuestionDisabled() && $quiz->isShowReviewQuestion() ) { ?>
-            <input type="button" name="skip" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+				<?php if ( $quiz->getQuizModus() == WpProQuiz_Model_Quiz::QUIZ_MODUS_CHECK && ! $quiz->isSkipQuestionDisabled() && $quiz->isShowReviewQuestion() ) { ?>
+					<input type="button" name="skip" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 						SFWD_LMS::get_template(
 							'learndash_quiz_messages',
 							array(
@@ -698,12 +672,11 @@ $cat_points    = array();
 								'message'      => sprintf( esc_html_x( 'Skip %s', 'placeholder: question', 'learndash' ), learndash_get_custom_label_lower( 'question' ) ),
 							)
 						)
-					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: left; margin-right: 10px ;">
-            <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
-            <?php } ?>
-            <div class="d-flex col-11 col-md-5 mx-5 px-2 mb-5 justify-content-around" style="float: right;">
-                <?php if ( ! is_rtl() ) { ?>
-                <input type="button" name="back" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: left; margin-right: 10px ;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+				<?php } ?>
+				<div class="d-flex col-11 col-md-5 mx-5 px-2 mb-5 justify-content-around" style="float: right;">
+				  <?php if ( ! is_rtl() ) { ?>
+				   <input type="button" name="back" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 					SFWD_LMS::get_template(
 						'learndash_quiz_messages',
 						array(
@@ -712,11 +685,9 @@ $cat_points    = array();
 							'message'      => esc_html__( 'Back', 'learndash' ),
 						)
 					)
-					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton  px-5 py-1 rounded"
-                    style="display: none;background-color:#fff;border:1px solid #FF6B35;color:#FF6B35;font-weight:400;font-size:14px;">
-                <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
-                <?php } else { ?>
-                <input type="button" name="next" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton  px-5 py-1 rounded" style="display: none;background-color:#fff;border:1px solid #FF6B35;color:#FF6B35;font-weight:400;font-size:14px;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+					<?php } else { ?>
+						<input type="button" name="next" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 							SFWD_LMS::get_template(
 								'learndash_quiz_messages',
 								array(
@@ -725,12 +696,10 @@ $cat_points    = array();
 									'message'      => esc_html__( 'Next', 'learndash' ),
 								)
 							)
-						) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton"
-                    style="float: left ; margin-right: 10px ; display: none;">
-                <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
-                <?php } ?>
-                <?php if ( ! is_rtl() ) { ?>
-                <input type="button" name="next" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+						) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: left ; margin-right: 10px ; display: none;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+					<?php } ?>
+				 	<?php if ( ! is_rtl() ) { ?>
+					<input type="button" name="next" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 						SFWD_LMS::get_template(
 							'learndash_quiz_messages',
 							array(
@@ -739,11 +708,9 @@ $cat_points    = array();
 								'message'      => esc_html__( 'Next', 'learndash' ),
 							)
 						)
-					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton  px-5 py-1 rounded"
-                    style="display: none;background-image:linear-gradient(90deg, rgb(42, 146, 162), rgb(70, 119, 173));font-weight:400;font-size:14px;">
-                <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
-                <?php } else { ?>
-                <input type="button" name="back" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton  px-5 py-1 rounded" style="display: none;background-image:linear-gradient(90deg, rgb(42, 146, 162), rgb(70, 119, 173));font-weight:400;font-size:14px;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+					<?php } else { ?>
+					<input type="button" name="back" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 						SFWD_LMS::get_template(
 							'learndash_quiz_messages',
 							array(
@@ -752,13 +719,12 @@ $cat_points    = array();
 								'message'      => esc_html__( 'Back', 'learndash' ),
 							)
 						)
-					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: right; display: none;">
-                <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
-            </div>
-
-
-            <?php if ( $question->isTipEnabled() ) { ?>
-            <input type="button" name="tip" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: right; display: none;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+				</div>
+				
+				
+				<?php if ( $question->isTipEnabled() ) { ?>
+					<input type="button" name="tip" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 						SFWD_LMS::get_template(
 							'learndash_quiz_messages',
 							array(
@@ -767,11 +733,9 @@ $cat_points    = array();
 								'message'      => esc_html__( 'Hint', 'learndash' ),
 							)
 						)
-					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton wpProQuiz_TipButton"
-                style="float: left ; display: inline-block; margin-right: 10px ;">
-            <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
-            <?php } ?>
-            <input type="button" name="check" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton wpProQuiz_TipButton" style="float: left ; display: inline-block; margin-right: 10px ;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+				<?php } ?>
+				<input type="button" name="check" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 					SFWD_LMS::get_template(
 						'learndash_quiz_messages',
 						array(
@@ -780,34 +744,31 @@ $cat_points    = array();
 							'message'      => esc_html__( 'Check', 'learndash' ),
 						)
 					)
-				) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: right ; margin-right: 10px ; display: none;">
-            <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+				) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: right ; margin-right: 10px ; display: none;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+				
+				<?php } ?>
+				<div style="clear: both;"></div>
 
-            <?php } ?>
-            <div style="clear: both;"></div>
+				<?php if ( $quiz->getQuizModus() == WpProQuiz_Model_Quiz::QUIZ_MODUS_SINGLE ) { ?>
+					<div style="margin-bottom: 20px;"></div>
+				<?php } ?>
+			</li>
 
-            <?php if ( $quiz->getQuizModus() == WpProQuiz_Model_Quiz::QUIZ_MODUS_SINGLE ) { ?>
-            <div style="margin-bottom: 20px;"></div>
-            <?php } ?>
-        </li>
-
-        <?php } ?>
-    </ol>
-    <?php if ( $quiz->getQuizModus() == WpProQuiz_Model_Quiz::QUIZ_MODUS_SINGLE ) { ?>
-    <div>
-        <input type="button" name="wpProQuiz_pageLeft" data-text="<?php // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+		<?php } ?>
+	</ol>
+	<?php if ( $quiz->getQuizModus() == WpProQuiz_Model_Quiz::QUIZ_MODUS_SINGLE ) { ?>
+		<div>
+			<input type="button" name="wpProQuiz_pageLeft" data-text="<?php // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 				// translators: placeholder: page number.
 				echo esc_html__( 'Page %d', 'learndash' );
-			?>" style="float: left; display: none;" class="wpProQuiz_button wpProQuiz_QuestionButton">
-        <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,Squiz.PHP.EmbeddedPhp.ContentAfterEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
-        <input type="button" name="wpProQuiz_pageRight" data-text="<?php // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+			?>" style="float: left; display: none;" class="wpProQuiz_button wpProQuiz_QuestionButton"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,Squiz.PHP.EmbeddedPhp.ContentAfterEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+			<input type="button" name="wpProQuiz_pageRight" data-text="<?php // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 				// translators: placeholder: page number.
 				echo esc_html__( 'Page %d', 'learndash' );
-			?>" style="float: right; display: none;" class="wpProQuiz_button wpProQuiz_QuestionButton">
-        <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,Squiz.PHP.EmbeddedPhp.ContentAfterEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+			?>" style="float: right; display: none;" class="wpProQuiz_button wpProQuiz_QuestionButton"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,Squiz.PHP.EmbeddedPhp.ContentAfterEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
 
-        <?php if ( $quiz->isShowReviewQuestion() && ! $quiz->isQuizSummaryHide() ) { ?>
-        <input type="button" name="checkSingle" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+			<?php if ( $quiz->isShowReviewQuestion() && ! $quiz->isQuizSummaryHide() ) { ?>
+				<input type="button" name="checkSingle" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 					SFWD_LMS::get_template(
 						'learndash_quiz_messages',
 						array(
@@ -820,10 +781,9 @@ $cat_points    = array();
 							),
 						)
 					)
-				); ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: right;">
-        <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
-        <?php } else { ?>
-        <input type="button" name="checkSingle" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
+				); ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: right;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+			<?php } else { ?>
+				<input type="button" name="checkSingle" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 					SFWD_LMS::get_template(
 						'learndash_quiz_messages',
 						array(
@@ -836,13 +796,12 @@ $cat_points    = array();
 							),
 						)
 					)
-				); ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: right;">
-        <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
-        <?php } ?>
+				); ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: right;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+			<?php } ?>
 
-        <div style="clear: both;"></div>
-    </div>
-    <?php } ?>
+			<div style="clear: both;"></div>
+		</div>
+	<?php } ?>
 </div>
 <?php
 if ( empty( $global_points ) ) {

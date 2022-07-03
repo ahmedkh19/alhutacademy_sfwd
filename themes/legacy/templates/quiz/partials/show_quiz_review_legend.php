@@ -76,17 +76,17 @@ $learndash_quiz_legend_incorrect_label = apply_filters( 'learndash_quiz_legend_i
 
 ?>
 <div class="wpProQuiz_reviewLegend">
-	<ol>
-		<li class="learndash-quiz-review-legend-item-current">
+	<ol style="float: right;direction: rtl;">
+		<li class="learndash-quiz-review-legend-item-current" data-toggle="tooltip" data-placement="top" title="السؤال الحالي">
 			<span class="wpProQuiz_reviewColor wpProQuiz_reviewQuestion_Target"></span>
 			<span class="wpProQuiz_reviewText"><?php echo wp_kses_post( $learndash_quiz_legend_current_label ); ?></span>
 		</li>
-		<li class="learndash-quiz-review-legend-item-review">
+		<li class="learndash-quiz-review-legend-item-review" data-toggle="tooltip" data-placement="top" title="هذا السؤال تم عرضه">
 			<span class="wpProQuiz_reviewColor wpProQuiz_reviewColor_Review"></span>
 			<span class="wpProQuiz_reviewText"><?php echo wp_kses_post( $learndash_quiz_legend_review_label ); ?></span>
 		</li>
 		<li class="learndash-quiz-review-legend-item-answered">
-			<span class="wpProQuiz_reviewColor wpProQuiz_reviewColor_Answer"></span>
+			<span class="wpProQuiz_reviewColor wpProQuiz_reviewColor_Answer" data-toggle="tooltip" data-placement="top" title="تم إجابة هذا السؤال"></span>
 			<span class="wpProQuiz_reviewText"><?php echo wp_kses_post( $learndash_quiz_legend_answered_label ); ?></span>
 		</li>
 		<li class="learndash-quiz-review-legend-item-correct">

@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'message'      => sprintf( esc_html_x( 'Review %s', 'placeholder: question', 'learndash' ), learndash_get_custom_label( 'question' ) ),
 				)
 			)
-		); ?>" class="wpProQuiz_button2 rounded py-1 px-2" style="background-image:linear-gradient(90deg, rgb(42, 146, 162), rgb(70, 119, 173));font-weight:400;font-size:14px; display: block;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,Squiz.PHP.EmbeddedPhp.ContentAfterEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+		); ?>" class="wpProQuiz_button2 rounded py-1 px-2" style="float:right; background-image:linear-gradient(90deg, rgb(42, 146, 162), rgb(70, 119, 173));font-weight:400;font-size:14px; display: block;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,Squiz.PHP.EmbeddedPhp.ContentAfterEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
 		<?php if ( ! $quiz->isQuizSummaryHide() ) { ?>
 			<input type="button" name="quizSummary" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 				SFWD_LMS::get_template(

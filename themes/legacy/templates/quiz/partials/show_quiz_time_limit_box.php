@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<div style="display: none;" class="wpProQuiz_time_limit">
+<div style="display: none;direction:rtl; " class="wpProQuiz_time_limit bg-white">
 	<div class="time">
 		<?php
 		echo wp_kses_post(
@@ -32,5 +32,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 		);
 		?>
 	</div>
-	<div class="wpProQuiz_progress"></div>
+	<div class="wpProQuiz_progress  shadow-sm" style="background-image:linear-gradient(90deg, rgb(42, 146, 162), rgb(70, 119, 173));"></div>
 </div>
