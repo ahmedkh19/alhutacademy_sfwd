@@ -18,10 +18,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="wpProQuiz_reviewQuestion">
-	<ol class="d-flex flex-row-reverse">
-		<?php for ( $xy = 1; $xy <= $question_count; $xy ++ ) { ?>
-			<li><?php echo $xy; ?></li>
-		<?php } ?>
-	</ol>
-	<div style="display: none;"></div>
+    <ol class="d-flex flex-row">
+        <?php for ( $xy = 1; $xy <= $question_count; $xy ++ ) { ?>
+        <li><?php echo $xy; ?></li>
+        <?php } ?>
+    </ol>
+    <div style="display: none;"></div>
 </div>
