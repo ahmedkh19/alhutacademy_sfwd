@@ -222,8 +222,8 @@ $cat_points    = array();
 					 * Print questions in a list for all other answer types
 					 */
 					?>
-					<div class="d-flex flex flex-row flex-wrap justify-content-between">
-					    <div class="col-11 mx-auto col-md-5 borde my-2 px-2 "style="background-color:#F3F3F3;border-radius:9px;">
+					<div class="d-flex  flex-row  justify-content-between">
+					    <div class="col-12  mx-auto col-md-5 borde my-2 px-2 " style="background-color:#F3F3F3;border-radius:9px;">
 						 <h6 class="text-center mt-2" style="color:#707070;">سؤال بنص موجود</h6>
 						 <p class="text-center mt-2" style="color:#707070;">
 						 هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.
@@ -232,7 +232,7 @@ $cat_points    = array();
 
 						 </p>
 					    </div>
-						<ul class="wpProQuiz_questionList col-11 col-md-5  mx-auto my-2 px-2" data-question_id="<?php echo esc_attr( $question->getId() ); ?>"
+						<ul class="wpProQuiz_questionList col-12 col-md-5 my-2 mx-2" data-question_id="<?php echo esc_attr( $question->getId() ); ?>"
 							data-type="<?php echo esc_attr( $question->getAnswerType() ); ?>">
 							<?php
 							if ( $question->getAnswerType() === 'sort_answer' ) {
@@ -674,7 +674,7 @@ $cat_points    = array();
 						)
 					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton" style="float: left; margin-right: 10px ;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
 				<?php } ?>
-				<div class="d-flex col-11 col-md-5 mx-5 px-2 mb-5 justify-content-around" style="float: right;">
+				<div class="d-flex col-12 mx-auto px-2 justify-content-center">
 				  <?php if ( ! is_rtl() ) { ?>
 				   <input type="button" name="back" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 					SFWD_LMS::get_template(
@@ -685,7 +685,7 @@ $cat_points    = array();
 							'message'      => esc_html__( 'Back', 'learndash' ),
 						)
 					)
-					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton  px-5 py-1 rounded" style="display: none;background-color:#fff;border:1px solid #FF6B35;color:#FF6B35;font-weight:400;font-size:14px;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton mx-3 px-5 py-1 rounded" style="display: none;background-color:#fff;border:1px solid #FF6B35;color:#FF6B35;font-weight:400;font-size:14px;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
 					<?php } else { ?>
 						<input type="button" name="next" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 							SFWD_LMS::get_template(
@@ -708,7 +708,7 @@ $cat_points    = array();
 								'message'      => esc_html__( 'Next', 'learndash' ),
 							)
 						)
-					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton  px-5 py-1 rounded" style="display: none;background-image:linear-gradient(90deg, rgb(42, 146, 162), rgb(70, 119, 173));font-weight:400;font-size:14px;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton mx-3 px-5 py-1 rounded" style="display: none;background-image:linear-gradient(90deg, rgb(42, 146, 162), rgb(70, 119, 173));font-weight:400;font-size:14px;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
 					<?php } else { ?>
 					<input type="button" name="back" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 						SFWD_LMS::get_template(
