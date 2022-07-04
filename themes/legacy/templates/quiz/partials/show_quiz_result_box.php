@@ -47,8 +47,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 </div>
 
 <div style="display: none;" class="wpProQuiz_results">
-	<h4 class="wpProQuiz_header"><?php esc_html_e( 'Results', 'learndash' ); ?></h4>
+	<h4 class="wpProQuiz_header text-center"><?php esc_html_e( 'Results', 'learndash' ); ?></h4>
+	<div class="d-flex flex-wrap justify-content-between align-items-center">
 	<?php
+	
 	if ( ! $quiz->isHideResultCorrectQuestion() ) {
 		echo wp_kses_post(
 			SFWD_LMS::get_template(
@@ -57,7 +59,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					'quiz_post_id' => $quiz->getID(),
 					'context'      => 'quiz_questions_answered_correctly_message',
 					// translators: placeholder: correct answer, question count, questions.
-					'message'      => '<p>' . sprintf( esc_html_x( '%1$s of %2$s %3$s answered correctly', 'placeholder: correct answer, question count, questions', 'learndash' ), '<span class="wpProQuiz_correct_answer">0</span>', '<span>' . $question_count . '</span>', learndash_get_custom_label( 'questions' ) ) . '</p>',
+					'message'      => '<p style="color:#4774AC">' . sprintf( esc_html_x( '%1$s of %2$s %3$s answered correctly', 'placeholder: correct answer, question count, questions', 'learndash' ), '<span class="wpProQuiz_correct_answer">0</span>', '<span>' . $question_count . '</span>', learndash_get_custom_label( 'questions' ) ) . '</p>',
 					'placeholders' => array( '0', $question_count ),
 				)
 			)
@@ -66,7 +68,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 	if ( ! $quiz->isHideResultQuizTime() ) {
 		?>
-		<p class="wpProQuiz_quiz_time">
+		<p class="wpProQuiz_quiz_time" style="color:#FF6B35;">
 		<?php
 			echo wp_kses_post(
 				SFWD_LMS::get_template(
@@ -102,7 +104,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php
 	if ( ! $quiz->isHideResultPoints() ) {
 		?>
-		<p class="wpProQuiz_points">
+		<p class="wpProQuiz_points" style="background-color: transparent;border: none;color: #3B9EC0;">
 		<?php
 			echo wp_kses_post(
 				SFWD_LMS::get_template(
@@ -160,9 +162,48 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<?php
 	}
 
+	
+
 	if ( $quiz->isShowAverageResult() ) {
 		?>
-		<div class="wpProQuiz_resultTable">
+		<div class="wpProQuiz_resultTable border-0" >
+		<div class="mx-auto" style="width:400px;height:400px;">
+	    	<canvas id="myChart" width="400" height="400"></canvas>
+	    </div>
+		<script>
+			const ctx = document.getElementById('myChart').getContext('2d');
+			const myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: ['مادة', 'مادة', 'مادة', 'مادة', 'مادة', 'مادة'],
+					datasets: [{
+						label: 'الدرجات',
+						data: [20, 30, 60, 50, 35, 40],
+						backgroundColor: [
+							'#48AB70',
+						],
+						barThickness:20
+						
+					}]
+				},
+				options: {
+					scales:{
+						y:{
+							ticks:{
+								color:'#4774AC',
+								font:20
+							}
+						},
+						x:{
+							ticks:{
+								color:'#4774AC'
+							}
+						}
+					}
+				}
+			});
+		</script>
+ 
 			<table>
 			<tbody>
 			<tr>
@@ -212,8 +253,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	}
 	?>
 
+
+	</div>
+	
+
 	<div class="wpProQuiz_catOverview" <?php $quiz_view->isDisplayNone( $quiz->isShowCategoryScore() ); ?>>
-		<h4>
+		<h4 class="d-none">
 		<?php
 		echo wp_kses_post(
 			SFWD_LMS::get_template(
@@ -228,7 +273,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		?>
 		</h4>
 
-		<div style="margin-top: 10px;">
+		<div class="d-none" style="margin-top: 10px;">
 			<ol>
 			<?php
 			foreach ( $quiz_view->category as $cat ) {
@@ -296,7 +341,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		</div>
 		<?php if ( ! $quiz->isBtnRestartQuizHidden() ) { ?>
-			<input class="wpProQuiz_button wpProQuiz_button_restartQuiz" type="button" name="restartQuiz"
+			<input class="wpProQuiz_button wpProQuiz_button_restartQuiz btn-liner px-3" type="button" name="restartQuiz"
 					value="<?php // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 						echo wp_kses_post(
 							SFWD_LMS::get_template(
@@ -317,7 +362,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		}
 		if ( ! $quiz->isBtnViewQuestionHidden() ) {
 			?>
-			<input class="wpProQuiz_button wpProQuiz_button_reShowQuestion" type="button" name="reShowQuestion"
+			<input class="wpProQuiz_button wpProQuiz_button_reShowQuestion btn-sec" type="button" name="reShowQuestion"
 					value="<?php // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 						echo wp_kses_post(
 							SFWD_LMS::get_template(

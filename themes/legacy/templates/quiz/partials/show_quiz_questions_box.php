@@ -569,7 +569,7 @@ $cat_points    = array();
 						<div style="display: none;" class="wpProQuiz_incorrect">
 							<?php if ( $question->isShowPointsInBox() && $question->isAnswerPointsActivated() ) { ?>
 								<div>
-									<span style="float: left;">
+									<span  style="float: left;">
 										<?php
 											echo wp_kses_post(
 												SFWD_LMS::get_template(
@@ -685,7 +685,7 @@ $cat_points    = array();
 							'message'      => esc_html__( 'Back', 'learndash' ),
 						)
 					)
-					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton mx-3 px-5 py-1 rounded" style="display: none;background-color:#fff;border:1px solid #FF6B35;color:#FF6B35;font-weight:400;font-size:14px;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton mx-3 px-5 py-1 rounded btn-sec" style="display: none;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
 					<?php } else { ?>
 						<input type="button" name="next" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 							SFWD_LMS::get_template(
@@ -708,7 +708,7 @@ $cat_points    = array();
 								'message'      => esc_html__( 'Next', 'learndash' ),
 							)
 						)
-					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton mx-3 px-5 py-1 rounded" style="display: none;background-image:linear-gradient(90deg, rgb(42, 146, 162), rgb(70, 119, 173));font-weight:400;font-size:14px;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
+					) ?>" class="wpProQuiz_button wpProQuiz_QuestionButton mx-3 px-5 py-1 rounded btn-liner" style="display: none;"> <?php // phpcs:ignore Generic.WhiteSpace.ScopeIndent.Incorrect,Squiz.PHP.EmbeddedPhp.ContentBeforeEnd,PEAR.Functions.FunctionCallSignature.Indent,PEAR.Functions.FunctionCallSignature.CloseBracketLine ?>
 					<?php } else { ?>
 					<input type="button" name="back" value="<?php echo wp_kses_post( // phpcs:ignore Squiz.PHP.EmbeddedPhp.ContentBeforeOpen,Squiz.PHP.EmbeddedPhp.ContentAfterOpen
 						SFWD_LMS::get_template(
